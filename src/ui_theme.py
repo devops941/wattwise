@@ -1,0 +1,536 @@
+"""
+WattWise UI Design System & Theme Engine
+Enterprise-grade styling, modern typography, glassmorphism cards,
+and cohesive aesthetic components for Streamlit.
+"""
+
+from pathlib import Path
+import streamlit as st
+
+
+def configure_sidebar_navigation():
+    """Dynamically sets icons and friendly titles for Streamlit sidebar navigation."""
+    try:
+        from streamlit.source_util import get_pages
+        pages = get_pages("app.py")
+        page_config = {
+            "app": ("Home", "🏠"),
+            "1_Dashboard": ("Dashboard", "📊"),
+            "2_Upload_Bill": ("Upload Bill", "📤"),
+            "3_Analysis": ("Cycle Analysis", "📈"),
+            "4_Peak_Consumption": ("Peak Discovery", "⚡"),
+            "5_Prediction": ("Forecasting", "🔮"),
+            "6_Bill_Estimation": ("Bill Estimation", "💰"),
+            "7_Recommendations": ("Recommendations", "💡"),
+            "8_Reports": ("Audit Reports", "📑"),
+        }
+        for p, info in pages.items():
+            stem = Path(info.get("script_path", "")).stem
+            for key, (friendly_title, icon) in page_config.items():
+                if key == stem or key == info.get("page_name"):
+                    info["page_name"] = friendly_title
+                    info["icon"] = icon
+    except Exception:
+        pass
+
+
+def apply_theme():
+    """Injects modern, professional enterprise SaaS CSS across the application with prominent typography."""
+    configure_sidebar_navigation()
+
+    st.markdown(
+        """
+        <style>
+        /* Import High-Legibility Modern SaaS Typography */
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+        /* Base Typography: Crisp, Large & Highly Readable */
+        html, body, [class*="css"], [class*="st-"] {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+            letter-spacing: -0.015em;
+            font-size: 16px;
+        }
+
+        code, pre, [class*="stCode"] {
+            font-family: 'JetBrains Mono', monospace !important;
+            font-size: 0.95rem !important;
+        }
+
+        /* Headings Hierarchy - Clean & Impactful */
+        h1, [data-testid="stHeadingWithActionElements"] h1 {
+            font-size: 2.35rem !important;
+            font-weight: 850 !important;
+            color: #0F172A !important;
+            letter-spacing: -0.035em !important;
+            line-height: 1.2 !important;
+            margin-bottom: 0.6rem !important;
+        }
+
+        h2, [data-testid="stHeadingWithActionElements"] h2 {
+            font-size: 1.70rem !important;
+            font-weight: 750 !important;
+            color: #0F172A !important;
+            letter-spacing: -0.025em !important;
+            line-height: 1.25 !important;
+            margin-top: 1.2rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+
+        h3, [data-testid="stHeadingWithActionElements"] h3 {
+            font-size: 1.40rem !important;
+            font-weight: 700 !important;
+            color: #1E293B !important;
+            letter-spacing: -0.02em !important;
+            margin-top: 1rem !important;
+            margin-bottom: 0.4rem !important;
+        }
+
+        h4, [data-testid="stHeadingWithActionElements"] h4, h5 {
+            font-size: 1.18rem !important;
+            font-weight: 650 !important;
+            color: #1E293B !important;
+            letter-spacing: -0.01em !important;
+        }
+
+        /* Paragraphs & Markdown Text */
+        p, div[data-testid="stMarkdownContainer"] p, .stMarkdown p {
+            font-size: 1.05rem !important;
+            line-height: 1.68 !important;
+            color: #334155 !important;
+        }
+
+        /* Captions */
+        .stCaption, [data-testid="stCaptionContainer"] {
+            font-size: 0.92rem !important;
+            color: #64748B !important;
+            line-height: 1.55 !important;
+        }
+
+        /* Top Header & App Layout */
+        .block-container {
+            padding-top: 1.8rem !important;
+            padding-bottom: 3.5rem !important;
+            max-width: 1280px !important;
+        }
+
+        /* Sleek Modern Hero Header */
+        .ww-hero {
+            background: radial-gradient(120% 120% at 50% 0%, #1E3A8A 0%, #0F172A 75%, #020617 100%);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            padding: 2.4rem 2.6rem;
+            color: #FFFFFF;
+            margin-bottom: 2.2rem;
+            box-shadow: 0 12px 36px -10px rgba(15, 23, 42, 0.45), 0 0 1px 1px rgba(255, 255, 255, 0.08) inset;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ww-hero::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 420px;
+            height: 420px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.20) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .ww-hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            padding: 5px 14px;
+            border-radius: 9999px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #93C5FD;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            margin-bottom: 1rem;
+        }
+
+        .ww-hero-title {
+            font-size: 2.45rem;
+            font-weight: 850;
+            line-height: 1.15;
+            margin-bottom: 0.65rem;
+            background: linear-gradient(135deg, #FFFFFF 40%, #BFDBFE 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.035em;
+        }
+
+        .ww-hero-subtitle {
+            font-size: 1.08rem;
+            font-weight: 450;
+            color: #CBD5E1;
+            line-height: 1.62;
+            max-width: 880px;
+            margin: 0;
+        }
+
+        /* Modern SaaS Cards */
+        .ww-card {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 18px;
+            padding: 1.8rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+            transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .ww-card:hover {
+            border-color: #3B82F6;
+            transform: translateY(-3px);
+            box-shadow: 0 14px 28px -8px rgba(37, 99, 235, 0.14), 0 4px 6px -4px rgba(37, 99, 235, 0.06);
+        }
+
+        .ww-card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: #EFF6FF;
+            color: #1D4ED8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.1rem;
+            border: 1px solid #DBEAFE;
+        }
+
+        .ww-card-title {
+            font-size: 1.25rem;
+            font-weight: 750;
+            color: #0F172A;
+            margin-bottom: 0.45rem;
+            letter-spacing: -0.02em;
+        }
+
+        .ww-card-desc {
+            font-size: 0.98rem;
+            color: #475569;
+            line-height: 1.58;
+            margin-bottom: 1.3rem;
+            flex-grow: 1;
+        }
+
+        /* Metric Enhancement: Large & High Impact */
+        [data-testid="stMetric"] {
+            background: #FFFFFF !important;
+            border: 1px solid #E2E8F0 !important;
+            border-radius: 16px !important;
+            padding: 1.25rem 1.4rem !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
+            transition: all 0.15s ease !important;
+        }
+
+        [data-testid="stMetric"]:hover {
+            border-color: #CBD5E1 !important;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06) !important;
+        }
+
+        [data-testid="stMetricLabel"] {
+            font-size: 0.85rem !important;
+            font-weight: 700 !important;
+            color: #64748B !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.06em !important;
+            margin-bottom: 0.45rem !important;
+        }
+
+        [data-testid="stMetricValue"] {
+            font-size: 2.15rem !important;
+            font-weight: 850 !important;
+            color: #0F172A !important;
+            letter-spacing: -0.035em !important;
+            line-height: 1.15 !important;
+        }
+
+        [data-testid="stMetricDelta"] {
+            font-size: 0.94rem !important;
+            font-weight: 650 !important;
+        }
+
+        /* Buttons Styling: Bold & Accessible */
+        .stButton > button {
+            border-radius: 12px !important;
+            font-weight: 650 !important;
+            font-size: 1.0rem !important;
+            padding: 0.65rem 1.35rem !important;
+            transition: all 0.18s ease-in-out !important;
+            border: 1px solid #CBD5E1 !important;
+        }
+
+        .stButton > button:hover {
+            border-color: #2563EB !important;
+            color: #1D4ED8 !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.12) !important;
+        }
+
+        .stButton > button[kind="primary"] {
+            background: linear-gradient(135deg, #1D4ED8 0%, #2563EB 100%) !important;
+            color: #FFFFFF !important;
+            border: none !important;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.28) !important;
+        }
+
+        .stButton > button[kind="primary"]:hover {
+            background: linear-gradient(135deg, #1E40AF 0%, #1D4ED8 100%) !important;
+            color: #FFFFFF !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.38) !important;
+        }
+
+        /* Tabs Styling: Prominent & Clear */
+        .stTabs [data-baseweb="tab-list"] {
+            gap: 1.8rem !important;
+            border-bottom: 2px solid #E2E8F0 !important;
+            padding-bottom: 0px !important;
+            margin-bottom: 1.6rem !important;
+        }
+
+        .stTabs [data-baseweb="tab"] {
+            height: auto !important;
+            padding: 0.75rem 0.5rem !important;
+            font-size: 1.05rem !important;
+            font-weight: 650 !important;
+            color: #64748B !important;
+            border-bottom: 2px solid transparent !important;
+            margin-bottom: -2px !important;
+        }
+
+        .stTabs [aria-selected="true"] {
+            color: #1D4ED8 !important;
+            border-bottom-color: #2563EB !important;
+            font-weight: 750 !important;
+        }
+
+        /* Alerts Styling: Clear Typography */
+        [data-testid="stAlert"] {
+            border-radius: 14px !important;
+            border-width: 1px !important;
+            padding: 0.95rem 1.25rem !important;
+            font-size: 1.0rem !important;
+            line-height: 1.62 !important;
+        }
+
+        [data-testid="stAlert"] p {
+            font-size: 1.0rem !important;
+            color: inherit !important;
+        }
+
+        /* Sliders & Inputs */
+        .stSlider label, .stNumberInput label, .stTextInput label, .stSelectbox label {
+            font-size: 1.02rem !important;
+            font-weight: 650 !important;
+            color: #1E293B !important;
+            margin-bottom: 0.35rem !important;
+        }
+
+        /* Expanders */
+        .streamlit-expanderHeader {
+            border-radius: 12px !important;
+            font-weight: 650 !important;
+            font-size: 1.02rem !important;
+            color: #1E293B !important;
+            background: #F8FAFC !important;
+            border: 1px solid #E2E8F0 !important;
+            padding: 0.75rem 1.0rem !important;
+        }
+
+        /* ── ENTERPRISE SIDEBAR STYLING & TOP REORDERING ────────────────── */
+        [data-testid="stSidebar"] {
+            background-color: #FFFFFF !important;
+            border-right: 1px solid #E2E8F0 !important;
+            box-shadow: 2px 0 12px rgba(0, 0, 0, 0.02) !important;
+        }
+
+        /* Parent container holding stSidebarHeader, stSidebarNav, and stSidebarUserContent */
+        div[data-testid="stSidebarContent"],
+        section[data-testid="stSidebar"] div[data-testid="stSidebarContent"] {
+            display: flex !important;
+            flex-direction: column !important;
+        }
+
+        /* Header (collapse button) at the very top */
+        div[data-testid="stSidebarContent"] > div[data-testid="stSidebarHeader"] {
+            order: 1 !important;
+        }
+
+        /* WattWise Brand Header sits at the TOP above navigation */
+        div[data-testid="stSidebarContent"] > div[data-testid="stSidebarUserContent"] {
+            order: 2 !important;
+            padding-top: 0.2rem !important;
+            padding-left: 0.95rem !important;
+            padding-right: 0.95rem !important;
+        }
+
+        /* Navigation menu sits BELOW the brand header */
+        div[data-testid="stSidebarContent"] > div[data-testid="stSidebarNav"],
+        div[data-testid="stSidebarContent"] > nav[data-testid="stSidebarNav"] {
+            order: 3 !important;
+            padding-top: 0.2rem !important;
+            padding-left: 0.95rem !important;
+            padding-right: 0.95rem !important;
+        }
+
+        /* Hide the awkward default separator line */
+        [data-testid="stSidebarNavSeparator"] {
+            display: none !important;
+        }
+
+        /* Section header for the navigation: Crisp & Professional */
+        [data-testid="stSidebarNav"]::before {
+            content: "NAVIGATION MENU";
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 750;
+            color: #94A3B8;
+            letter-spacing: 0.08em;
+            padding: 0.45rem 0.5rem 0.45rem 0.5rem;
+            text-transform: uppercase;
+        }
+
+        [data-testid="stSidebarNav"] ul {
+            gap: 4px !important;
+            padding: 0 !important;
+            list-style-type: none !important;
+        }
+
+        [data-testid="stSidebarNav"] li {
+            margin-bottom: 3px !important;
+        }
+
+        /* Large, Prominent Sidebar Menu Links */
+        [data-testid="stSidebarNav"] li a {
+            display: flex !important;
+            align-items: center !important;
+            border-radius: 12px !important;
+            padding: 0.65rem 0.90rem !important;
+            color: #334155 !important;
+            font-weight: 600 !important;
+            font-size: 1.02rem !important;
+            text-decoration: none !important;
+            transition: all 0.15s ease-in-out !important;
+            border: 1px solid transparent !important;
+        }
+
+        [data-testid="stSidebarNav"] li a:hover {
+            background: #F1F5F9 !important;
+            color: #0F172A !important;
+            transform: translateX(3px) !important;
+            border-color: #E2E8F0 !important;
+        }
+
+        /* Active Navigation Tab - Modern SaaS Gradient Pill */
+        [data-testid="stSidebarNav"] li a[aria-current="page"] {
+            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%) !important;
+            color: #1D4ED8 !important;
+            font-weight: 750 !important;
+            border: 1px solid #BFDBFE !important;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.10) !important;
+        }
+
+        [data-testid="stSidebarNav"] li a span {
+            font-size: 1.02rem !important;
+            letter-spacing: -0.015em !important;
+        }
+
+        /* Custom Status Pill */
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border-radius: 9999px;
+            font-size: 0.88rem;
+            font-weight: 650;
+        }
+        .status-pill-green {
+            background: #ECFDF5;
+            color: #065F46;
+            border: 1px solid #A7F3D0;
+        }
+        .status-pill-blue {
+            background: #EFF6FF;
+            color: #1E40AF;
+            border: 1px solid #BFDBFE;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .badge-blue { background: #DBEAFE; color: #1E40AF; }
+        .badge-green { background: #D1FAE5; color: #065F46; }
+        .badge-amber { background: #FEF3C7; color: #92400E; }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_sidebar_header():
+    """Renders a sleek logo header at the top of the sidebar with prominent enterprise branding."""
+    from src.household_manager import get_active_household, mask_consumer_name
+
+    df, meta = get_active_household()
+
+    with st.sidebar:
+        # 1. Main Application Brand Card (Clean, Prominent and Top-Mounted)
+        st.markdown(
+            """
+            <div style="padding: 0.3rem 0.2rem 1.0rem 0.2rem; border-bottom: 1px solid #E2E8F0; margin-bottom: 0.8rem;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="background: linear-gradient(135deg, #1D4ED8, #3B82F6); width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 850; font-size: 1.4rem; box-shadow: 0 4px 14px rgba(37,99,235,0.30);">⚡</div>
+                    <div>
+                        <div style="font-size: 1.35rem; font-weight: 850; color: #0F172A; letter-spacing: -0.035em; line-height: 1.15;">WattWise</div>
+                        <div style="font-size: 0.78rem; color: #64748B; font-weight: 650; letter-spacing: 0.03em;">Energy Intelligence v2.1</div>
+                    </div>
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+        # 2. Only show active household profile if bills are actually loaded;
+        # When no household is selected, show NOTHING (no empty state boxes)
+        if df is not None and len(df) > 0:
+            is_demo = meta.get("is_demo", False) if meta else False
+            raw_name = meta.get("consumer_name") or meta.get("name") or "Household" if meta else "Household"
+            name = raw_name if is_demo else mask_consumer_name(raw_name)
+            badge_label = "Demo" if is_demo else "Verified"
+            badge_bg = "#EFF6FF" if is_demo else "#ECFDF5"
+            badge_color = "#1D4ED8" if is_demo else "#059669"
+            badge_border = "#BFDBFE" if is_demo else "#A7F3D0"
+
+            st.markdown(
+                f"""
+                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 0.55rem 0.85rem; margin-bottom: 0.8rem; display: flex; align-items: center; justify-content: space-between;">
+                    <span style="font-size: 0.88rem; font-weight: 750; color: #0F172A; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 150px;">
+                        👤 {name}
+                    </span>
+                    <span style="background: {badge_bg}; color: {badge_color}; border: 1px solid {badge_border}; font-size: 0.70rem; font-weight: 750; padding: 2px 8px; border-radius: 9999px;">
+                        {badge_label}
+                    </span>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )

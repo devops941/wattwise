@@ -1,0 +1,11 @@
+{
+  "id": "demo_senthil_murugan",
+  "name": "SENTHIL MURUGAN",
+  "connection_no": "05-472-024-917",
+  "section": "KOODALNAGAR",
+  "tariff_category": "LT Domestic",
+  "is_demo": true,
+  "cycles_count": 5,
+  "created_at": "2026-11-17 12:00:00",
+  "description": "Academic demonstration dataset (5 billing cycles, Feb-Oct 2026)"
+}

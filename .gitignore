@@ -1,0 +1,32 @@
+# Environments
+venv/
+.venv/
+env/
+ENV/
+
+# Python Cache & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Streamlit Local Cache
+.streamlit/secrets.toml
+
+# OS & Editor generated files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Logs & Temp
+*.log
+tmp/
+scratch/
+.matplotlib/
+# OCR Model Weights
+data/.easyocr/
+*.pth
