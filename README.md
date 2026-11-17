@@ -2,8 +2,11 @@
 
 [![Python 3.12](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.40.0-FF4B4B.svg)](https://streamlit.io/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-wattwise--analytics.streamlit.app-2563EB.svg)](https://wattwise-analytics.streamlit.app/)
 [![ReportLab](https://img.shields.io/badge/ReportLab-5.1.0-0D47A1.svg)](https://www.reportlab.com/)
-[![Tests](https://img.shields.io/badge/Tests-Passing-brightgreen.svg)]()
+[![Tests](https://img.shields.io/badge/Tests-46%20Passing-brightgreen.svg)]()
+
+> **Live Application URL:** 🚀 [https://wattwise-analytics.streamlit.app/](https://wattwise-analytics.streamlit.app/)
 
 WattWise is an end-to-end residential energy analytics platform engineered specifically for **Tamil Nadu electricity consumers (TANGEDCO / TNPDCL)**. It extracts consumption intelligence from physical and digital Low Tension (LT-1A) domestic electricity bills, identifies seasonal peak-load cycles, estimates future bills, and delivers actionable energy conservation recommendations.
 

@@ -48,6 +48,6 @@ Residential electricity consumers in Tamil Nadu lack visibility into their bi-mo
 
 ### PROJECT LINKS
 * **GitHub Repository:** [https://github.com/devops941/wattwise](https://github.com/devops941/wattwise)
-* **Live Application:** [http://localhost:8501](http://localhost:8501)
+* **Live Application:** [https://wattwise-analytics.streamlit.app/](https://wattwise-analytics.streamlit.app/)
 * **Domain:** Energy Analytics | Smart Grid & AI | Sustainability & Cleantech
 * **Application Type:** Full-Stack Web Application / Python Analytics System
