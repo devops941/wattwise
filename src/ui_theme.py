@@ -41,17 +41,25 @@ def configure_sidebar_navigation():
             "8_Reports": ("Audit Reports", "📑"),
         }
 
+        changed = False
         for pgs in page_dicts:
             for p, info in pgs.items():
                 stem = Path(info.get("script_path", "")).stem
                 pname = info.get("page_name", "")
                 if stem == "app" or pname == "app":
-                    info["page_name"] = "Home"
-                    info["icon"] = "🏠"
+                    if info.get("page_name") != "Home" or info.get("icon") != "🏠":
+                        info["page_name"] = "Home"
+                        info["icon"] = "🏠"
+                        changed = True
                 for key, (friendly_title, icon) in page_config.items():
                     if key == stem or key == pname:
-                        info["page_name"] = friendly_title
-                        info["icon"] = icon
+                        if info.get("page_name") != friendly_title or info.get("icon") != icon:
+                            info["page_name"] = friendly_title
+                            info["icon"] = icon
+                            changed = True
+
+        if changed and hasattr(su, "_on_pages_changed"):
+            su._on_pages_changed.send()
     except Exception:
         pass
 
@@ -751,25 +759,25 @@ def apply_theme():
         }
 
         /* Replace 'app' link text with '🏠 Home' in sidebar navigation */
-        [data-testid="stSidebarNavLink"][href="/"] span,
-        [data-testid="stSidebarNavLink"][href=""] span,
-        [data-testid="stSidebarNavLink"][href="./"] span,
-        [data-testid="stSidebarNavItems"] li:first-child a[data-testid="stSidebarNavLink"] span,
-        [data-testid="stSidebarNav"] li:first-child a span {
+        a[data-testid="stSidebarNavLink"]:not([href*="Dashboard"]):not([href*="Upload"]):not([href*="Analysis"]):not([href*="Peak"]):not([href*="Prediction"]):not([href*="Bill"]):not([href*="Recommendations"]):not([href*="Reports"]) span,
+        a[data-testid="stSidebarNavLink"]:not([href*="Dashboard"]):not([href*="Upload"]):not([href*="Analysis"]):not([href*="Peak"]):not([href*="Prediction"]):not([href*="Bill"]):not([href*="Recommendations"]):not([href*="Reports"]) svg,
+        [data-testid="stSidebarNav"] li:first-child a span,
+        [data-testid="stSidebarNavItems"] > li:first-child span,
+        [data-testid="stSidebarNavItems"] li:first-child a span {
             display: none !important;
         }
 
-        [data-testid="stSidebarNavLink"][href="/"]::after,
-        [data-testid="stSidebarNavLink"][href=""]::after,
-        [data-testid="stSidebarNavLink"][href="./"]::after,
-        [data-testid="stSidebarNavItems"] li:first-child a[data-testid="stSidebarNavLink"]::after,
-        [data-testid="stSidebarNav"] li:first-child a::after {
+        a[data-testid="stSidebarNavLink"]:not([href*="Dashboard"]):not([href*="Upload"]):not([href*="Analysis"]):not([href*="Peak"]):not([href*="Prediction"]):not([href*="Bill"]):not([href*="Recommendations"]):not([href*="Reports"])::after,
+        [data-testid="stSidebarNav"] li:first-child a::after,
+        [data-testid="stSidebarNavItems"] > li:first-child a::after,
+        [data-testid="stSidebarNavItems"] li:first-child a::after {
             content: "🏠  Home" !important;
             display: inline-block !important;
             font-size: 1.02rem !important;
             font-weight: 650 !important;
             letter-spacing: -0.015em !important;
             line-height: normal !important;
+            color: inherit !important;
         }
 
         /* Custom Status Pill */
