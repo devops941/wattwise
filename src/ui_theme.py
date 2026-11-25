@@ -54,10 +54,16 @@ def apply_theme():
         }
 
         /* Base Typography: Crisp, Large & Highly Readable */
-        html, body, [class*="css"], [class*="st-"] {
+        html, body, [class*="css"] {
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
             letter-spacing: -0.015em;
             font-size: 16px;
+        }
+
+        /* Prevent global font-size from overriding small text/badges/inputs in Streamlit internals */
+        [class*="st-"] {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+            letter-spacing: -0.015em;
         }
 
         code, pre, [class*="stCode"] {
@@ -355,6 +361,74 @@ def apply_theme():
             color: #FFFFFF !important;
             transform: translateY(-2px) !important;
             box-shadow: 0 8px 24px rgba(37, 99, 235, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.4) !important;
+        }
+
+        /* ── FROSTED GLASS FILE UPLOADER & DROPZONE REPAIR ─────────────── */
+        [data-testid="stFileUploader"] {
+            width: 100% !important;
+            margin-bottom: 1.2rem !important;
+        }
+
+        [data-testid="stFileUploaderDropzone"] {
+            background: rgba(255, 255, 255, 0.75) !important;
+            backdrop-filter: blur(14px) !important;
+            -webkit-backdrop-filter: blur(14px) !important;
+            border: 2px dashed rgba(147, 197, 253, 0.8) !important;
+            border-radius: 16px !important;
+            padding: 1.8rem 1.4rem !important;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03), inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
+            transition: all 0.2s ease-in-out !important;
+        }
+
+        [data-testid="stFileUploaderDropzone"]:hover {
+            border-color: #2563EB !important;
+            background: rgba(255, 255, 255, 0.92) !important;
+            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.12) !important;
+        }
+
+        /* Prevent text overlapping or collision in dropzone */
+        [data-testid="stFileUploaderDropzone"] div[data-testid="stFileUploaderDropzoneInstructions"] {
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: wrap !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 0.8rem !important;
+            text-align: center !important;
+        }
+
+        [data-testid="stFileUploaderDropzone"] button,
+        [data-testid="stFileUploaderDropzone"] button[data-testid="stBaseButton-secondary"] {
+            font-size: 0.92rem !important;
+            padding: 0.5rem 1.2rem !important;
+            border-radius: 10px !important;
+            margin: 0 !important;
+            white-space: nowrap !important;
+            height: auto !important;
+            min-height: 38px !important;
+            border: 1px solid #CBD5E1 !important;
+            background: #FFFFFF !important;
+            color: #1E293B !important;
+            font-weight: 650 !important;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+        }
+
+        [data-testid="stFileUploaderDropzone"] button:hover {
+            border-color: #2563EB !important;
+            color: #1D4ED8 !important;
+            background: #F8FAFC !important;
+        }
+
+        [data-testid="stFileUploaderDropzone"] span {
+            font-size: 0.92rem !important;
+            color: #475569 !important;
+            font-weight: 500 !important;
+        }
+
+        [data-testid="stFileUploaderDropzone"] small {
+            font-size: 0.82rem !important;
+            color: #64748B !important;
+            font-weight: 500 !important;
         }
 
         /* ── TABS STYLING WITH FROSTED GLASS ───────────────────────────── */

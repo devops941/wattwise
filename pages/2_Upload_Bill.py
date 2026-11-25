@@ -71,26 +71,42 @@ tab_upload, tab_saved, tab_units = st.tabs([
 
 # ── TAB 1: UPLOAD & VERIFY BILLS ───────────────────────────────────────────
 with tab_upload:
-    col_up, col_guide = st.columns([3, 2])
+    uploaded_files = st.file_uploader(
+        "Select one or multiple Tamil Nadu EB Bill PDFs:",
+        type=["pdf"],
+        accept_multiple_files=True,
+        help="Drag and drop your bi-monthly electricity bills downloaded from tnpdcl.in or scanned invoices."
+    )
 
-    with col_up:
-        uploaded_files = st.file_uploader(
-            "Select one or multiple Tamil Nadu EB Bill PDFs:",
-            type=["pdf"],
-            accept_multiple_files=True,
-            help="Drag and drop your bi-monthly electricity bills downloaded from tnpdcl.in or scanned invoices."
-        )
-
-    with col_guide:
-        st.markdown("### Supported Tamil Nadu EB Bills")
-        st.markdown(
-            """
-            - **TNPDCL / TANGEDCO Tax Invoices** (LT Domestic LT-1A)
-            - **Portal Digital E-Bills** (Instant text extraction)
-            - **Physical Scanned Invoices** (Automated offline OCR)
-            - **Bi-monthly Cycles** (60-day billing intervals)
-            """
-        )
+    if not uploaded_files:
+        g1, g2, g3 = st.columns(3)
+        with g1:
+            st.markdown("""
+            <div class="ww-card" style="padding: 1.2rem;">
+                <div style="font-size: 1.15rem; margin-bottom: 0.35rem;">📄 <b>Portal Digital E-Bills</b></div>
+                <div style="font-size: 0.90rem; color: #475569; line-height: 1.55;">
+                    Direct instant extraction from official TNPDCL / TANGEDCO web portal download PDFs.
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+        with g2:
+            st.markdown("""
+            <div class="ww-card" style="padding: 1.2rem;">
+                <div style="font-size: 1.15rem; margin-bottom: 0.35rem;">📷 <b>Physical Scanned Bills</b></div>
+                <div style="font-size: 0.90rem; color: #475569; line-height: 1.55;">
+                    Automated offline OCR extracts meter numbers, dates, and units from physical paper bills.
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+        with g3:
+            st.markdown("""
+            <div class="ww-card" style="padding: 1.2rem;">
+                <div style="font-size: 1.15rem; margin-bottom: 0.35rem;">⚡ <b>LT-1A Domestic Audits</b></div>
+                <div style="font-size: 0.90rem; color: #475569; line-height: 1.55;">
+                    Full validation for bi-monthly cycles with 100 free units government subsidy audit.
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
 
     if uploaded_files:
         # Validate each uploaded file (size, header, empty check)
