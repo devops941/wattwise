@@ -35,7 +35,7 @@ def configure_sidebar_navigation():
 
 
 def apply_theme():
-    """Injects modern, professional enterprise SaaS CSS across the application with prominent typography."""
+    """Injects modern, professional enterprise Glassmorphism CSS across the application."""
     configure_sidebar_navigation()
 
     st.markdown(
@@ -43,6 +43,15 @@ def apply_theme():
         <style>
         /* Import High-Legibility Modern SaaS Typography */
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+        /* ── AMBIENT GLASSMORPHISM CANVAS ──────────────────────────────── */
+        .stApp {
+            background: radial-gradient(circle at 12% 15%, rgba(219, 234, 254, 0.55) 0%, transparent 45%),
+                        radial-gradient(circle at 88% 22%, rgba(224, 231, 255, 0.50) 0%, transparent 45%),
+                        radial-gradient(circle at 50% 80%, rgba(238, 242, 255, 0.60) 0%, transparent 55%),
+                        #F8FAFC !important;
+            min-height: 100vh;
+        }
 
         /* Base Typography: Crisp, Large & Highly Readable */
         html, body, [class*="css"], [class*="st-"] {
@@ -113,15 +122,17 @@ def apply_theme():
             max-width: 1280px !important;
         }
 
-        /* Sleek Modern Hero Header */
+        /* ── DARK GLASSMORPHIC HERO HEADER ────────────────────────────── */
         .ww-hero {
-            background: radial-gradient(120% 120% at 50% 0%, #1E3A8A 0%, #0F172A 75%, #020617 100%);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 20px;
-            padding: 2.4rem 2.6rem;
+            background: radial-gradient(120% 120% at 50% 0%, rgba(30, 58, 138, 0.95) 0%, rgba(15, 23, 42, 0.96) 75%, rgba(2, 6, 23, 0.98) 100%);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 24px;
+            padding: 2.6rem 2.8rem;
             color: #FFFFFF;
-            margin-bottom: 2.2rem;
-            box-shadow: 0 12px 36px -10px rgba(15, 23, 42, 0.45), 0 0 1px 1px rgba(255, 255, 255, 0.08) inset;
+            margin-bottom: 2.4rem;
+            box-shadow: 0 20px 50px -15px rgba(15, 23, 42, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.25);
             position: relative;
             overflow: hidden;
         }
@@ -131,9 +142,9 @@ def apply_theme():
             position: absolute;
             top: -50%;
             right: -20%;
-            width: 420px;
-            height: 420px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.20) 0%, transparent 70%);
+            width: 480px;
+            height: 480px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.25) 0%, transparent 70%);
             pointer-events: none;
         }
 
@@ -142,70 +153,79 @@ def apply_theme():
             align-items: center;
             gap: 8px;
             background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.22);
-            padding: 5px 14px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 6px 16px;
             border-radius: 9999px;
-            font-size: 0.82rem;
+            font-size: 0.84rem;
             font-weight: 700;
             color: #93C5FD;
             text-transform: uppercase;
             letter-spacing: 0.07em;
-            margin-bottom: 1rem;
+            margin-bottom: 1.1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         .ww-hero-title {
-            font-size: 2.45rem;
-            font-weight: 850;
+            font-size: 2.55rem;
+            font-weight: 900;
             line-height: 1.15;
-            margin-bottom: 0.65rem;
-            background: linear-gradient(135deg, #FFFFFF 40%, #BFDBFE 100%);
+            margin-bottom: 0.75rem;
+            background: linear-gradient(135deg, #FFFFFF 30%, #BFDBFE 85%, #93C5FD 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: -0.035em;
+            letter-spacing: -0.04em;
         }
 
         .ww-hero-subtitle {
-            font-size: 1.08rem;
+            font-size: 1.10rem;
             font-weight: 450;
-            color: #CBD5E1;
-            line-height: 1.62;
-            max-width: 880px;
+            color: #E2E8F0;
+            line-height: 1.65;
+            max-width: 900px;
             margin: 0;
         }
 
-        /* Modern SaaS Cards */
-        .ww-card {
-            background: #FFFFFF;
-            border: 1px solid #E2E8F0;
-            border-radius: 18px;
+        /* ── FROSTED GLASS CARDS ───────────────────────────────────────── */
+        .ww-glass-card, .ww-card {
+            background: rgba(255, 255, 255, 0.72) !important;
+            backdrop-filter: blur(18px) saturate(190%) !important;
+            -webkit-backdrop-filter: blur(18px) saturate(190%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.85) !important;
+            border-radius: 20px !important;
             padding: 1.8rem;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
-            transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.05),
+                        0 1px 3px 0 rgba(0, 0, 0, 0.02),
+                        inset 0 1px 1px 0 rgba(255, 255, 255, 0.9) !important;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
             height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
-        .ww-card:hover {
-            border-color: #3B82F6;
-            transform: translateY(-3px);
-            box-shadow: 0 14px 28px -8px rgba(37, 99, 235, 0.14), 0 4px 6px -4px rgba(37, 99, 235, 0.06);
+        .ww-glass-card:hover, .ww-card:hover {
+            background: rgba(255, 255, 255, 0.88) !important;
+            border-color: rgba(59, 130, 246, 0.55) !important;
+            transform: translateY(-4px) !important;
+            box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.16),
+                        0 0 1px 1px rgba(255, 255, 255, 0.95) inset !important;
         }
 
         .ww-card-icon {
-            width: 48px;
-            height: 48px;
+            width: 52px;
+            height: 52px;
             border-radius: 14px;
-            background: #EFF6FF;
+            background: linear-gradient(135deg, rgba(239, 246, 255, 0.9) 0%, rgba(219, 234, 254, 0.8) 100%);
             color: #1D4ED8;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             margin-bottom: 1.1rem;
-            border: 1px solid #DBEAFE;
+            border: 1px solid rgba(191, 219, 254, 0.9);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.10);
         }
 
         .ww-card-title {
@@ -224,19 +244,59 @@ def apply_theme():
             flex-grow: 1;
         }
 
-        /* Metric Enhancement: Large & High Impact */
+        /* ── GLASS STEP CARDS (HOW IT WORKS) ───────────────────────────── */
+        .ww-step-card {
+            background: rgba(255, 255, 255, 0.68);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            border-radius: 18px;
+            padding: 1.6rem;
+            box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+            transition: all 0.22s ease;
+            height: 100%;
+        }
+
+        .ww-step-card:hover {
+            background: rgba(255, 255, 255, 0.85);
+            transform: translateY(-3px);
+            border-color: #60A5FA;
+            box-shadow: 0 16px 32px -8px rgba(37, 99, 235, 0.14);
+        }
+
+        .ww-step-number {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #1D4ED8 0%, #3B82F6 100%);
+            color: white;
+            font-weight: 800;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+        }
+
+        /* ── FROSTED GLASS METRICS ─────────────────────────────────────── */
         [data-testid="stMetric"] {
-            background: #FFFFFF !important;
-            border: 1px solid #E2E8F0 !important;
-            border-radius: 16px !important;
+            background: rgba(255, 255, 255, 0.75) !important;
+            backdrop-filter: blur(16px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.85) !important;
+            border-radius: 18px !important;
             padding: 1.25rem 1.4rem !important;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
-            transition: all 0.15s ease !important;
+            box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.04),
+                        inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
+            transition: all 0.2s ease !important;
         }
 
         [data-testid="stMetric"]:hover {
-            border-color: #CBD5E1 !important;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06) !important;
+            background: rgba(255, 255, 255, 0.92) !important;
+            border-color: rgba(59, 130, 246, 0.45) !important;
+            box-shadow: 0 12px 28px -6px rgba(37, 99, 235, 0.10) !important;
+            transform: translateY(-2px) !important;
         }
 
         [data-testid="stMetricLabel"] {
@@ -261,43 +321,49 @@ def apply_theme():
             font-weight: 650 !important;
         }
 
-        /* Buttons Styling: Bold & Accessible */
+        /* ── GLASS BUTTONS WITH REFLECTION ─────────────────────────────── */
         .stButton > button {
             border-radius: 12px !important;
             font-weight: 650 !important;
             font-size: 1.0rem !important;
             padding: 0.65rem 1.35rem !important;
-            transition: all 0.18s ease-in-out !important;
-            border: 1px solid #CBD5E1 !important;
+            transition: all 0.2s ease-in-out !important;
+            background: rgba(255, 255, 255, 0.75) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+            border: 1px solid rgba(203, 213, 225, 0.7) !important;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
         }
 
         .stButton > button:hover {
             border-color: #2563EB !important;
             color: #1D4ED8 !important;
-            transform: translateY(-1px) !important;
-            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.12) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 18px rgba(37, 99, 235, 0.15) !important;
+            background: rgba(255, 255, 255, 0.95) !important;
         }
 
         .stButton > button[kind="primary"] {
             background: linear-gradient(135deg, #1D4ED8 0%, #2563EB 100%) !important;
             color: #FFFFFF !important;
-            border: none !important;
-            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.28) !important;
+            border: 1px solid rgba(255, 255, 255, 0.25) !important;
+            box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.3) !important;
         }
 
         .stButton > button[kind="primary"]:hover {
             background: linear-gradient(135deg, #1E40AF 0%, #1D4ED8 100%) !important;
             color: #FFFFFF !important;
-            transform: translateY(-1px) !important;
-            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.38) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.4) !important;
         }
 
-        /* Tabs Styling: Prominent & Clear */
+        /* ── TABS STYLING WITH FROSTED GLASS ───────────────────────────── */
         .stTabs [data-baseweb="tab-list"] {
             gap: 1.8rem !important;
-            border-bottom: 2px solid #E2E8F0 !important;
+            border-bottom: 2px solid rgba(226, 232, 240, 0.8) !important;
             padding-bottom: 0px !important;
             margin-bottom: 1.6rem !important;
+            background: transparent !important;
         }
 
         .stTabs [data-baseweb="tab"] {
@@ -316,13 +382,16 @@ def apply_theme():
             font-weight: 750 !important;
         }
 
-        /* Alerts Styling: Clear Typography */
+        /* ── FROSTED ALERTS & CALLOUTS ─────────────────────────────────── */
         [data-testid="stAlert"] {
-            border-radius: 14px !important;
+            border-radius: 16px !important;
             border-width: 1px !important;
-            padding: 0.95rem 1.25rem !important;
+            padding: 1.0rem 1.3rem !important;
             font-size: 1.0rem !important;
             line-height: 1.62 !important;
+            backdrop-filter: blur(14px) !important;
+            -webkit-backdrop-filter: blur(14px) !important;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03) !important;
         }
 
         [data-testid="stAlert"] p {
@@ -340,20 +409,23 @@ def apply_theme():
 
         /* Expanders */
         .streamlit-expanderHeader {
-            border-radius: 12px !important;
+            border-radius: 14px !important;
             font-weight: 650 !important;
             font-size: 1.02rem !important;
             color: #1E293B !important;
-            background: #F8FAFC !important;
-            border: 1px solid #E2E8F0 !important;
+            background: rgba(248, 250, 252, 0.8) !important;
+            backdrop-filter: blur(10px) !important;
+            border: 1px solid rgba(226, 232, 240, 0.8) !important;
             padding: 0.75rem 1.0rem !important;
         }
 
         /* ── ENTERPRISE SIDEBAR STYLING & TOP REORDERING ────────────────── */
         [data-testid="stSidebar"] {
-            background-color: #FFFFFF !important;
-            border-right: 1px solid #E2E8F0 !important;
-            box-shadow: 2px 0 12px rgba(0, 0, 0, 0.02) !important;
+            background-color: rgba(255, 255, 255, 0.82) !important;
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            border-right: 1px solid rgba(226, 232, 240, 0.85) !important;
+            box-shadow: 2px 0 16px rgba(0, 0, 0, 0.02) !important;
         }
 
         /* Parent container holding stSidebarHeader, stSidebarNav, and stSidebarUserContent */
@@ -427,19 +499,19 @@ def apply_theme():
         }
 
         [data-testid="stSidebarNav"] li a:hover {
-            background: #F1F5F9 !important;
+            background: rgba(241, 245, 249, 0.8) !important;
             color: #0F172A !important;
             transform: translateX(3px) !important;
-            border-color: #E2E8F0 !important;
+            border-color: rgba(226, 232, 240, 0.8) !important;
         }
 
         /* Active Navigation Tab - Modern SaaS Gradient Pill */
         [data-testid="stSidebarNav"] li a[aria-current="page"] {
-            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%) !important;
+            background: linear-gradient(135deg, rgba(239, 246, 255, 0.95) 0%, rgba(219, 234, 254, 0.9) 100%) !important;
             color: #1D4ED8 !important;
             font-weight: 750 !important;
             border: 1px solid #BFDBFE !important;
-            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.10) !important;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
         }
 
         [data-testid="stSidebarNav"] li a span {
@@ -456,14 +528,15 @@ def apply_theme():
             border-radius: 9999px;
             font-size: 0.88rem;
             font-weight: 650;
+            backdrop-filter: blur(8px);
         }
         .status-pill-green {
-            background: #ECFDF5;
+            background: rgba(236, 253, 245, 0.85);
             color: #065F46;
             border: 1px solid #A7F3D0;
         }
         .status-pill-blue {
-            background: #EFF6FF;
+            background: rgba(239, 246, 255, 0.85);
             color: #1E40AF;
             border: 1px solid #BFDBFE;
         }
@@ -478,9 +551,9 @@ def apply_theme():
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
-        .badge-blue { background: #DBEAFE; color: #1E40AF; }
-        .badge-green { background: #D1FAE5; color: #065F46; }
-        .badge-amber { background: #FEF3C7; color: #92400E; }
+        .badge-blue { background: #DBEAFE; color: #1E40AF; border: 1px solid #BFDBFE; }
+        .badge-green { background: #D1FAE5; color: #065F46; border: 1px solid #A7F3D0; }
+        .badge-amber { background: #FEF3C7; color: #92400E; border: 1px solid #FDE68A; }
         </style>
         """,
         unsafe_allow_html=True,
@@ -497,9 +570,9 @@ def render_sidebar_header():
         # 1. Main Application Brand Card (Clean, Prominent and Top-Mounted)
         st.markdown(
             """
-            <div style="padding: 0.3rem 0.2rem 1.0rem 0.2rem; border-bottom: 1px solid #E2E8F0; margin-bottom: 0.8rem;">
+            <div style="padding: 0.3rem 0.2rem 1.0rem 0.2rem; border-bottom: 1px solid rgba(226, 232, 240, 0.8); margin-bottom: 0.8rem;">
                 <div style="display: flex; align-items: center; gap: 12px;">
-                    <div style="background: linear-gradient(135deg, #1D4ED8, #3B82F6); width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 850; font-size: 1.4rem; box-shadow: 0 4px 14px rgba(37,99,235,0.30);">⚡</div>
+                    <div style="background: linear-gradient(135deg, #1D4ED8, #3B82F6); width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 850; font-size: 1.4rem; box-shadow: 0 6px 16px rgba(37,99,235,0.35);">⚡</div>
                     <div>
                         <div style="font-size: 1.35rem; font-weight: 850; color: #0F172A; letter-spacing: -0.035em; line-height: 1.15;">WattWise</div>
                         <div style="font-size: 0.78rem; color: #64748B; font-weight: 650; letter-spacing: 0.03em;">Energy Intelligence v2.1</div>
@@ -523,7 +596,7 @@ def render_sidebar_header():
 
             st.markdown(
                 f"""
-                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 12px; padding: 0.55rem 0.85rem; margin-bottom: 0.8rem; display: flex; align-items: center; justify-content: space-between;">
+                <div style="background: rgba(248, 250, 252, 0.85); backdrop-filter: blur(10px); border: 1px solid rgba(226, 232, 240, 0.9); border-radius: 12px; padding: 0.55rem 0.85rem; margin-bottom: 0.8rem; display: flex; align-items: center; justify-content: space-between;">
                     <span style="font-size: 0.88rem; font-weight: 750; color: #0F172A; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 150px;">
                         👤 {name}
                     </span>
