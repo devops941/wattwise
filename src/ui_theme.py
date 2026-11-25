@@ -61,9 +61,25 @@ def apply_theme():
         }
 
         /* Prevent global font-size from overriding small text/badges/inputs in Streamlit internals */
-        [class*="st-"] {
+        [class*="st-"]:not([class*="material-symbols"]):not([class*="material-icons"]):not([data-testid*="Icon"]) {
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
             letter-spacing: -0.015em;
+        }
+
+        /* Explicitly preserve Streamlit material icon fonts and ligatures */
+        [data-testid*="Icon"],
+        [class*="material-symbols"],
+        [class*="material-icons"],
+        .streamlit-expanderHeader svg,
+        .streamlit-expanderHeader [data-testid="stExpanderToggleIcon"] {
+            font-family: 'Material Symbols Rounded', 'Material Icons', sans-serif !important;
+            font-feature-settings: 'liga' 1 !important;
+            letter-spacing: normal !important;
+            font-style: normal !important;
+            text-transform: none !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
         }
 
         code, pre, [class*="stCode"] {
@@ -591,14 +607,25 @@ def apply_theme():
 
         /* Expanders */
         .streamlit-expanderHeader {
+            display: flex !important;
+            align-items: center !important;
+            gap: 0.75rem !important;
             border-radius: 14px !important;
             font-weight: 650 !important;
             font-size: 1.02rem !important;
             color: #1E293B !important;
-            background: rgba(248, 250, 252, 0.8) !important;
+            background: rgba(248, 250, 252, 0.85) !important;
             backdrop-filter: blur(10px) !important;
-            border: 1px solid rgba(226, 232, 240, 0.8) !important;
+            border: 1px solid rgba(226, 232, 240, 0.9) !important;
             padding: 0.75rem 1.0rem !important;
+        }
+
+        .streamlit-expanderHeader [data-testid="stExpanderToggleIcon"] {
+            flex-shrink: 0 !important;
+            margin-right: 0.5rem !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
         }
 
         /* ── ENTERPRISE SIDEBAR STYLING & TOP REORDERING ────────────────── */
