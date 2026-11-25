@@ -11,8 +11,7 @@ import streamlit as st
 def configure_sidebar_navigation():
     """Dynamically sets icons and friendly titles for Streamlit sidebar navigation."""
     try:
-        from streamlit.source_util import get_pages
-        pages = get_pages("app.py")
+        from streamlit.source_util import get_pages, _cached_pages
         page_config = {
             "app": ("Home", "🏠"),
             "1_Dashboard": ("Dashboard", "📊"),
@@ -24,12 +23,27 @@ def configure_sidebar_navigation():
             "7_Recommendations": ("Recommendations", "💡"),
             "8_Reports": ("Audit Reports", "📑"),
         }
-        for p, info in pages.items():
-            stem = Path(info.get("script_path", "")).stem
-            for key, (friendly_title, icon) in page_config.items():
-                if key == stem or key == info.get("page_name"):
-                    info["page_name"] = friendly_title
-                    info["icon"] = icon
+        
+        targets = []
+        for path_arg in ["app.py", "", None]:
+            try:
+                pgs = get_pages(path_arg) if path_arg is not None else _cached_pages
+                if pgs and isinstance(pgs, dict):
+                    targets.append(pgs)
+            except Exception:
+                pass
+
+        for pgs in targets:
+            for p, info in pgs.items():
+                stem = Path(info.get("script_path", "")).stem
+                pname = info.get("page_name", "")
+                if stem == "app" or pname == "app":
+                    info["page_name"] = "Home"
+                    info["icon"] = "🏠"
+                for key, (friendly_title, icon) in page_config.items():
+                    if key == stem or key == pname:
+                        info["page_name"] = friendly_title
+                        info["icon"] = icon
     except Exception:
         pass
 
@@ -726,6 +740,22 @@ def apply_theme():
         [data-testid="stSidebarNav"] li a span {
             font-size: 1.02rem !important;
             letter-spacing: -0.015em !important;
+        }
+
+        /* Replace 'app' link text with '🏠 Home' in sidebar navigation */
+        [data-testid="stSidebarNav"] li:first-child a span {
+            font-size: 0px !important;
+            display: inline-block !important;
+            line-height: 0 !important;
+        }
+
+        [data-testid="stSidebarNav"] li:first-child a span::after {
+            content: "🏠  Home" !important;
+            font-size: 1.02rem !important;
+            font-weight: 650 !important;
+            letter-spacing: -0.015em !important;
+            visibility: visible !important;
+            line-height: normal !important;
         }
 
         /* Custom Status Pill */
