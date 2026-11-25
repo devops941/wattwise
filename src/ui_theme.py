@@ -128,6 +128,91 @@ def apply_theme():
             max-width: 1280px !important;
         }
 
+        /* ── HIDE STREAMLIT CLOUD TOOLBAR, DEPLOY, FORK & STAR ICONS ──── */
+        [data-testid="stToolbar"],
+        [data-testid="stDecoration"],
+        .stDeployButton,
+        #MainMenu,
+        footer,
+        div[data-testid="stStatusWidget"] {
+            display: none !important;
+            visibility: hidden !important;
+        }
+
+        header[data-testid="stHeader"] {
+            background: transparent !important;
+            height: 0px !important;
+            min-height: 0px !important;
+            padding: 0 !important;
+        }
+
+        /* Keep sidebar toggle button accessible when sidebar is closed */
+        div[data-testid="stSidebarCollapsedControl"] {
+            display: block !important;
+            visibility: visible !important;
+            position: fixed !important;
+            top: 14px !important;
+            left: 14px !important;
+            z-index: 99999 !important;
+            background: rgba(255, 255, 255, 0.85) !important;
+            backdrop-filter: blur(10px) !important;
+            border-radius: 10px !important;
+            border: 1px solid rgba(226, 232, 240, 0.9) !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+        }
+
+        /* ── ELECTRICITY ANIMATIONS & ENERGY GLOW ──────────────────────── */
+        @keyframes electric-beam {
+            0% {
+                left: -100%;
+                opacity: 0;
+            }
+            25% {
+                opacity: 1;
+            }
+            75% {
+                opacity: 1;
+            }
+            100% {
+                left: 100%;
+                opacity: 0;
+            }
+        }
+
+        @keyframes electric-pulse {
+            0%, 100% {
+                box-shadow: 0 0 10px rgba(59, 130, 246, 0.4), 0 0 20px rgba(37, 99, 235, 0.2);
+                border-color: rgba(147, 197, 253, 0.35);
+            }
+            50% {
+                box-shadow: 0 0 22px rgba(96, 165, 250, 0.85), 0 0 38px rgba(59, 130, 246, 0.55), inset 0 0 8px rgba(147, 197, 253, 0.4);
+                border-color: rgba(191, 219, 254, 0.95);
+            }
+        }
+
+        @keyframes electric-bolt-glow {
+            0%, 100% {
+                filter: drop-shadow(0 0 3px rgba(250, 204, 21, 0.7));
+                transform: scale(1);
+            }
+            50% {
+                filter: drop-shadow(0 0 10px rgba(250, 204, 21, 1)) drop-shadow(0 0 16px rgba(251, 191, 36, 0.8));
+                transform: scale(1.15);
+            }
+        }
+
+        @keyframes electric-shimmer {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
         /* ── DARK GLASSMORPHIC HERO HEADER ────────────────────────────── */
         .ww-hero {
             background: radial-gradient(120% 120% at 50% 0%, rgba(30, 58, 138, 0.95) 0%, rgba(15, 23, 42, 0.96) 75%, rgba(2, 6, 23, 0.98) 100%);
@@ -141,6 +226,20 @@ def apply_theme():
             box-shadow: 0 20px 50px -15px rgba(15, 23, 42, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.25);
             position: relative;
             overflow: hidden;
+        }
+
+        /* High-Voltage Scanning Electric Current along top border */
+        .ww-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 75%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #38BDF8, #60A5FA, #93C5FD, #FFFFFF, #38BDF8, transparent);
+            animation: electric-beam 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            box-shadow: 0 0 14px #38BDF8, 0 0 28px #60A5FA;
+            z-index: 2;
         }
 
         .ww-hero::after {
@@ -171,6 +270,12 @@ def apply_theme():
             letter-spacing: 0.07em;
             margin-bottom: 1.1rem;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            animation: electric-pulse 3.2s ease-in-out infinite;
+        }
+
+        .ww-hero-pill span:first-child {
+            display: inline-block;
+            animation: electric-bolt-glow 2s ease-in-out infinite;
         }
 
         .ww-hero-title {
@@ -178,10 +283,12 @@ def apply_theme():
             font-weight: 900;
             line-height: 1.15;
             margin-bottom: 0.75rem;
-            background: linear-gradient(135deg, #FFFFFF 30%, #BFDBFE 85%, #93C5FD 100%);
+            background: linear-gradient(135deg, #FFFFFF 15%, #BAE6FD 45%, #60A5FA 75%, #FFFFFF 100%);
+            background-size: 250% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -0.04em;
+            animation: electric-shimmer 6s ease-in-out infinite;
         }
 
         .ww-hero-subtitle {
@@ -213,9 +320,10 @@ def apply_theme():
 
         .ww-glass-card:hover, .ww-card:hover {
             background: rgba(255, 255, 255, 0.88) !important;
-            border-color: rgba(59, 130, 246, 0.55) !important;
+            border-color: rgba(59, 130, 246, 0.65) !important;
             transform: translateY(-4px) !important;
-            box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.16),
+            box-shadow: 0 20px 42px -10px rgba(37, 99, 235, 0.20),
+                        0 0 22px rgba(96, 165, 250, 0.22),
                         0 0 1px 1px rgba(255, 255, 255, 0.95) inset !important;
         }
 
